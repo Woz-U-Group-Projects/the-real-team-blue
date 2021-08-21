@@ -1,0 +1,22 @@
+<ul>
+{{#each inventory}}
+<li>
+<h1>{{ProductID}}: {{ProductName}}</h1>
+<h2>{{ProductDesc}}</h2>
+</li>
+{{/each}}
+</ul>
+
+    <!--ProductID: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
+    ProductName: DataTypes.STRING,
+    ProductDesc: DataTypes.STRING,
+    ProductQty: DataTypes.INTEGER,
+    ProductPrice: DataTypes.INTEGER,
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE
+    -->
