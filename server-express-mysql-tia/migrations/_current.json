@@ -77,6 +77,11 @@
                     "field": "Admin",
                     "seqType": "Sequelize.BOOLEAN"
                 },
+                "Deleted": {
+                    "default": false,
+                    "field": "Deleted",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
                 "createdAt": {
                     "field": "createdAt",
                     "seqType": "Sequelize.DATE"
@@ -91,14 +96,10 @@
         "inventories": {
             "tableName": "inventories",
             "schema": {
-                "id": {
-                    "allowNull": false,
-                    "primaryKey": true,
-                    "autoIncrement": true,
-                    "field": "id",
-                    "seqType": "Sequelize.INTEGER"
-                },
                 "ProductID": {
+                    "allowNull": false,
+                    "autoIncrement": true,
+                    "primaryKey": true,
                     "field": "ProductID",
                     "seqType": "Sequelize.INTEGER"
                 },
@@ -119,12 +120,10 @@
                     "seqType": "Sequelize.INTEGER"
                 },
                 "createdAt": {
-                    "allowNull": false,
                     "field": "createdAt",
                     "seqType": "Sequelize.DATE"
                 },
                 "updatedAt": {
-                    "allowNull": false,
                     "field": "updatedAt",
                     "seqType": "Sequelize.DATE"
                 }
@@ -132,5 +131,5 @@
             "indexes": []
         }
     },
-    "revision": 3
+    "revision": 4
 }

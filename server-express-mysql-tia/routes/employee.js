@@ -4,7 +4,6 @@ var models = require('../models');
 var authService = require('../services/auth'); //<--- Add authentication service
  
 
-
 //Employee signup
 router.get('/signup', function(req, res, next) {
   res.render('signup');
@@ -20,7 +19,8 @@ router.post('/signup', function(req, res, next) {
         FirstName: req.body.firstName,
         LastName: req.body.lastName,
         Email: req.body.email,
-        Password: authService.hashPassword(req.body.password) //<--- has password within auth.js 
+        Password: authService.hashPassword(req.body.password), //<--- has password within auth.js
+        Admin: req.body.admin 
       }
     })
     .spread(function(result, created) {
@@ -65,28 +65,61 @@ router.post('/login', function (req, res, next) {
 });
 
 //Employee profile view
-
 router.get('/profile', function (req, res, next) {
   let token = req.cookies.jwt;
+ 
   if (token) {
     authService.verifyUser(token)
       .then(user => {
         if (user) {
-          res.render('profile', {
-            FirstName: user.FirstName,
-            LastName: user.LastName,
-            Email: user.Email,
-            Username: user.Username,
-          });
+          let admin = user.Admin;
+          if (admin == 1) {
+            console.log("Admin");
+            models.employee.findAll({}).then(employeesFound => {
+            res.render('admin', 
+              {
+              Username: user.Username,
+              FirstName: user.FirstName,
+              LastName: user.LastName,
+              Email: user.Email,
+              EmployeeID: user.EmployeeID,
+              employees: employeesFound
+              }
+              )});
+            } else {  
+          console.log("Normal employee");
+          res.render('profile', 
+            {
+              FirstName: user.FirstName,
+              LastName: user.LastName,
+              Email: user.Email,
+              Username: user.Username
+            });
+            }
         } else {
           res.status(401);
           res.send('Invalid authentication token');
-        }
-      });
+        }})
   } else {
     res.status(401);
     res.send('Must be logged in');
   }
+});
+
+
+//Delete an Employee
+router.delete('/admin/editemployee/:id', function (req, res, next) {
+  let id = parseInt(req.params.id);
+  models.employee.destroy({
+    where: { EmployeeID: id }
+  })
+  .then(function(rowDeleted){ // rowDeleted will return number of rows deleted
+    if(rowDeleted === 1)
+      {console.log('Deleted successfully');}
+    }, 
+    function(err)
+      {console.log(err); } 
+  )
 });
 
 

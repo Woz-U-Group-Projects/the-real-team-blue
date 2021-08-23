@@ -69,6 +69,14 @@
                     "field": "Password",
                     "seqType": "Sequelize.STRING"
                 },
+                "Admin": {
+                    "allowNull": false,
+                    "defaultValue": {
+                        "value": false
+                    },
+                    "field": "Admin",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
                 "createdAt": {
                     "field": "createdAt",
                     "seqType": "Sequelize.DATE"
@@ -124,5 +132,5 @@
             "indexes": []
         }
     },
-    "revision": 2
+    "revision": 3
 }
