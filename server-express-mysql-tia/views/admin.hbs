@@ -9,15 +9,18 @@
 <h3>Email: {{Email}}</h3>
 
 
+
 <div>
-  <a href="http://localhost:3000/inventory">Check Inventory</a>
+  <a href="http://localhost:3000/inventory/addinventory">Check and Update Inventory</a>
 </div>
 
 
+ 
 <h1>Employee List</h1>
 <ul>
 {{#each employees}}
 <li>{{EmployeeID}} {{FirstName}} {{LastName}} {{Email}}</li>
-<button type="submit" method="POST" action="/employee/{{EmployeeID}}">Delete</button>
+<button type="submit" method="POST" action="/employee/edit/{{EmployeeID}}">Update</button>
+<button type="submit" method="DELETE" action="/employee/{{EmployeeID}}">Delete</button>
 {{/each}}
 </ul>
