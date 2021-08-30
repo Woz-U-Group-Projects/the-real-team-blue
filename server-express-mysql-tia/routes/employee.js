@@ -3,6 +3,13 @@ var router = express.Router();
 var models = require('../models');
 var authService = require('../services/auth'); //<--- Add authentication service
 
+router.get('/', function(req, res, next) {
+  models.employee.findAll({}).then(employeeFound => {
+    res.json(employeeFound)
+  });
+});
+
+
 //Employee and Admin Signup
 router.get('/signup', function(req, res, next) {
   res.render('signup');
@@ -106,21 +113,14 @@ router.get('/profile', function (req, res, next) {
   }
 });
 
-//Modify an Employee: Admin Only (Will be on Admin Profile/ No Auth Required Here) (TO BE CHANGED)
 
 //Delete an Employee: Admin Only (Will be on Admin Profile/ No Auth Required Here) (TO BE CHANGED)
-router.delete("/employee/:id", function (req, res, next) {
-  let employeeId = parseInt(req.params.id);
-  models.employee
-    .destroy({
-      where: { employee_id : employeeId }
-    })
-    .then(result => res.redirect('/employee/profile'))
-    .catch(err => { 
-      res.status(400); 
-      res.send("There was a problem deleting the user. Please make sure you are specifying the correct id."); 
-    }
-);
+router.delete("/:employeeid", function(req, res, next) {
+  let id = parseInt(req.params.employeeid);
+  models.employee.findByPk(id)
+    .then(employee => employee.destroy())
+    .then(() => res.send({ id }))
+    .catch(err => res.status(400).send(err));
 });
 
 
