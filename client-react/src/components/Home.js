@@ -2,8 +2,9 @@ import React from "react";
 import axios from "axios";
 import '../task.min.css'
 
+
 class Home extends React.Component {
-    constructor(props) {
+   /* constructor(props) {
       super(props);
       this.state = { tasks: [] };
       this.taskName = React.createRef();
@@ -40,22 +41,14 @@ class Home extends React.Component {
       });
     };
   
-    //create update and delete functions to complete CRUD
+    //create update and delete functions to complete CRUD*/
   
   
     render() {
       return (
         <div>
-          <h3>List of tasks (React)</h3>
-          <input ref={this.taskName} />
-          <button type="button" className="btn btn-primary" onClick={this.addTask}>add</button>
-          <ul>
-            {this.state.tasks.map(p => (
-              <li key={p.taskid}>
-                {p.name} : { p.complete ? "complete" : "not complete" } <button type="button" className="btn btn-success">Complete</button><button type="button" className="btn btn-danger">Delete</button>
-              </li>
-            ))}
-          </ul>
+          <h3>Welcome to A B Computer</h3>
+
         </div>
       );
     }

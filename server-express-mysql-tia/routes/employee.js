@@ -31,8 +31,8 @@ router.post('/signup', function(req, res, next) {
     })
     .spread(function(result, created) {
       if (created) {
-        //res.send('User successfully created');
-        res.redirect('/employee/login');
+        res.send('User successfully created');
+        //res.redirect('/employee/login');
       } else {
         res.send('This user already exists');
       }
@@ -61,7 +61,7 @@ router.post('/login', function (req, res, next) {
       if (passwordMatch) {
         let token = authService.signUser(user);
         res.cookie('jwt', token);
-        res.redirect('/employee/profile');
+        console.log('Successful Login');
       } else {
         console.log('Wrong password');
         res.send('Wrong password');
