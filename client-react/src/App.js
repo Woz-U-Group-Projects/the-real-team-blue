@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -9,6 +9,7 @@ import Signup from './components/Signup';
 import Home from './components/Home';
 import Login from './components/Login';
 import Profile from './components/Profile';
+import Logout from './components/Logout';
 
 function App () {
   return (
@@ -25,6 +26,9 @@ function App () {
           <li>
             <Link to="/login">Login</Link>
           </li>
+          <li>
+            <Link to="/logout">Logout</Link>
+          </li>
         </ul>
       </nav>
 
@@ -39,6 +43,9 @@ function App () {
         </Route>
         <Route path="/">
           <Home />
+        </Route>
+        <Route path="/logout">
+          <Logout />
         </Route>
       </Switch>
     </div>

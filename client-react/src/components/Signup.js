@@ -50,7 +50,8 @@ class Signup extends React.Component {
       admin: this.state.Admin
     })
     .then(response => {
-    window.location.href="/#Home";
+      window.location.href="/#Login";
+    
     });
   };
 

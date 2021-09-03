@@ -62,6 +62,7 @@ router.post('/login', function (req, res, next) {
         let token = authService.signUser(user);
         res.cookie('jwt', token);
         console.log('Successful Login');
+        res.redirect('/employee/profile');
       } else {
         console.log('Wrong password');
         res.send('Wrong password');
@@ -115,15 +116,27 @@ router.get('/profile', function (req, res, next) {
 
 
 //Delete an Employee: Admin Only (Will be on Admin Profile/ No Auth Required Here) (TO BE CHANGED)
-router.delete("/:employeeid", function(req, res, next) {
+/*router.delete("/:employeeid", function(req, res, next) {
   let id = parseInt(req.params.employeeid);
   models.employee.findByPk(id)
     .then(employee => employee.destroy())
     .then(() => res.send({ id }))
     .catch(err => res.status(400).send(err));
+});*/
+
+router.delete("/employee/:id", function (req, res, next) {
+  let employeeId = parseInt(req.params.id);
+  models.employee
+    .destroy({
+      where: { employee_id: employeeId }
+    })
+    .then(result => res.send('Employee Deleted'))
+    .catch(err => { 
+      res.status(400); 
+      res.send("There was a problem deleting the user. Please make sure you are specifying the correct id."); 
+    }
+);
 });
-
-
 
 
 //Employee logout

@@ -42,7 +42,7 @@ class Login extends React.Component {
       password: this.state.Password,
     })
     .then(response => {
-    window.location.href="/#Profile";
+    //window.location.href="/#Profile";
     });
   };
 
