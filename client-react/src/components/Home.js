@@ -3,6 +3,8 @@ import axios from "axios";
 import '../task.min.css'
 
 
+const username = localStorage.getItem('name');
+
 class Home extends React.Component {
    /* constructor(props) {
       super(props);
@@ -47,7 +49,7 @@ class Home extends React.Component {
     render() {
       return (
         <div>
-          <h3>Welcome to A B Computer</h3>
+          <h3>Welcome {username}</h3>
 
         </div>
       );

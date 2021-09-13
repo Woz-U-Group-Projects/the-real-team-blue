@@ -61,8 +61,10 @@ router.post('/login', function (req, res, next) {
       if (passwordMatch) {
         let token = authService.signUser(user);
         res.cookie('jwt', token);
+        //localStorage.setItem('token', token);
+        res.send("Successful");
         console.log('Successful Login');
-        res.redirect('/employee/profile');
+        //res.redirect('/employee/profile');
       } else {
         console.log('Wrong password');
         res.send('Wrong password');
@@ -142,7 +144,7 @@ router.delete("/employee/:id", function (req, res, next) {
 //Employee logout
 router.get('/logout', function (req, res, next) {
   res.cookie('jwt', "", { expires: new Date(0) });
-  res.redirect('/employee/login');
+  //res.redirect('/employee/login');
 });
 
 

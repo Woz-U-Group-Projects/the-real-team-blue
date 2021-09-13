@@ -1,76 +1,202 @@
-import React from "react";
-import axios from "axios";
+import React, {useContext, useState} from "react";
 import '../task.min.css'
+import {MyContext} from '../MyContent';
+import axios from 'axios'
 
-let url = "http://localhost:3001/employee";
+// import axios from 'axios'
+// let url = "http://localhost:3001/employee";
 
-class Login extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { 
-      employee: [],
-      Username: '',
-      Password: ''
-   };
-    this.userName = React.createRef();
-    this.handleChange = this.handleChange.bind(this);
-  }
+// class Login extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = { 
+//       employee: [],
+//       Username: '',
+//       Password: '',
+//       redirectToReferrer: false
+//    };
+//     this.userName = React.createRef();
+//     this.handleChange = this.handleChange.bind(this);
+//   }
 
-  componentDidMount() {
-    this.getData();
-  }
+//   componentDidMount() {
+//     this.getData();
+//   }
 
- // componentDidUpdate(){
- //   console.log(this.state);
- // }
+//  // componentDidUpdate(){
+//  //   console.log(this.state);
+//  // }
 
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
+//   handleChange = e => {
+//     this.setState({
+//       [e.target.name]: e.target.value,
+//       //redirectToReferrer: true
+//     })
+//   }
   
 
-  getData = () => {
-    axios.get(url).then(response => this.setState({ employee: response.data }));
-  };
+//   getData = () => {
+//     axios.get(url).then(response => this.setState({ employee: response.data }));
+//   };
 
-  loginEmployee = (e) => {
-    //e.preventDefault();
-    axios.post(`${url}/login`, { 
-      username: this.state.Username,
-      password: this.state.Password,
-    })
-    .then(response => {
-    //window.location.href="/#Profile";
-    });
-  };
+//   loginEmployee = (e) => {
+//     e.preventDefault();
+//     axios.post(`${url}/login`, { 
+//       username: this.state.Username,
+//       password: this.state.Password,
+//     })
+//     .then(response => {
+//    console.log(response);
+//    if (response.data == "Successful") {
+//     window.location.href="/profile";
+//    }
+//     });
+//   };
 
-  //create update and delete functions to complete CRUD
+//   //create update and delete functions to complete CRUD
 
 
   
-  render() {
-    return (
-      <div>
-        <h1>Welcome to A B Computer's Employee Portal! Please Log In</h1>
+//   render() {
+//     //const redirectToReferrer = this.state.redirectToReferrer;
+//     //if (redirectToReferrer) {
+//     //return <Redirect to="/profile" />
+// //}
 
-        <form id="login" name="login" onSubmit={this.loginEmployee}>
-            <div>
-                <label htmlFor="name">Username: </label>
-                <input type="text" name="Username" onChange={this.handleChange} required/>
-            </div>
-            <div>
-                <label htmlFor="name">Password: </label>
-                <input type="password" name="Password" onChange={this.handleChange} required/>
-            </div>
-            <div>
-                <button type="submit"> Submit</button>
-            </div>
-        </form>
+//     return (
+//       <div>
+//         <h1>Welcome to A B Computer's Employee Portal! Please Log In</h1>
+
+//         <form id="login" name="login" onSubmit={this.loginEmployee}>
+//             <div>
+//                 <label htmlFor="name">Username: </label>
+//                 <input type="text" name="Username" onChange={this.handleChange} required/>
+//             </div>
+//             <div>
+//                 <label htmlFor="name">Password: </label>
+//                 <input type="password" name="Password" onChange={this.handleChange} required/>
+//             </div>
+//             <div>
+//                 <button type="submit"> Submit</button>
+//             </div>
+//         </form>
+//       </div>
+
+//     );
+
+
+
+//   }
+// }
+
+// export default Login;
+
+
+
+
+function Login(){
+
+
+  const {toggleNav,loginUser,isLoggedIn} = useContext(MyContext);
+  //const toggleNav= useContext(MyContext);
+  //const loginUser= useContext(MyContext);
+  //const isLoggedIn = useContext(MyContext);
+
+  const initialState = {
+      userInfo:{
+        Username: '',
+        Password: ''
+      },
+      errorMsg:'',
+      successMsg:'',
+  }
+
+  const [state,setState] = useState(initialState);
+
+  // On change input value (email & password)
+  const onChangeValue = (e) => {
+      setState({
+          ...state,
+          userInfo:{
+              ...state.userInfo,
+              [e.target.name]:e.target.value
+          }
+      });
+  }
+
+
+
+  // On Submit Login From
+  const submitForm = async (e) => {
+      e.preventDefault();
+      const data = await loginUser(state.userInfo);
+      // data.success ?  window.location.href="/profile" : console.log("err");
+console.log(data);
+if ( data == "Successful"){
+  await isLoggedIn();
+  //localStorage.setItem('name', state.userInfo.Username)
+  localStorage.setItem('user', JSON.stringify(state.userInfo))
+  window.location.pathname="/profile";
+
+}
+
+      // if(data.success && data.token){
+      //     setState({
+      //         ...initialState,
+      //     });
+      //     localStorage.setItem('loginToken', data.token);
+      //     await isLoggedIn();
+      //     window.location.href="/profile";
+      // }
+      // else{
+      //     setState({
+      //         ...state,
+      //         successMsg:'',
+      //         errorMsg:data.message
+      //     });
+      // }
+  }
+
+  // Show Message on Error or Success
+  let successMsg = '';
+  let errorMsg = '';
+  if(state.errorMsg){
+      errorMsg = <div className="error-msg">{state.errorMsg}</div>;
+  }
+  if(state.successMsg){
+      successMsg = <div className="success-msg">{state.successMsg}</div>;
+  }
+
+
+
+  return(
+  
+      <div className="_loginRegister">
+          <h1>Login</h1>
+          <form  onSubmit={submitForm} noValidate>
+              <div className="form-control">
+                  <label>Username</label>
+                  <input name="Username" type="text" value={state.userInfo.Username} onChange={onChangeValue} />
+              </div>
+              <div className="form-control">
+                  <label>PassWord</label>
+                  <input name="Password" type="password" value={state.userInfo.Password} onChange={onChangeValue} />
+              </div>
+              {errorMsg}
+              {successMsg}
+              <div className="form-control">
+                  <button type="submit">Login</button>
+              </div>
+          </form>
+           <div className="_navBtn">
+              <button onClick={toggleNav}>Register</button>
+          </div>
       </div>
-    );
-  }
+  
+  );
+  
 }
 
 export default Login;
+
+
