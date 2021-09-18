@@ -21,7 +21,9 @@ app.set('view engine', 'hbs');
 //CORS code for front-end
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');// orgin, where we are accepting requests from everywhere (*)
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Headers', 'Origin, Authorization, X-Requested-With, Content-Type, Accept');
+  res.header("Access-Control-Allow-Headers: access");//recently added
+  res.header("Access-Control-Allow-Methods: POST");//recently added
   next();
 });
 

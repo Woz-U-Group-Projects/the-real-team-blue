@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import '../task.min.css'
 import {MyContext} from '../MyContent';
 import axios from 'axios'
@@ -92,28 +92,24 @@ import axios from 'axios'
 // export default Login;
 
 
-
-
 function Login(){
 
 
-  const {toggleNav,loginUser,isLoggedIn} = useContext(MyContext);
-  //const toggleNav= useContext(MyContext);
-  //const loginUser= useContext(MyContext);
-  //const isLoggedIn = useContext(MyContext);
+  const {loginUser,isLoggedIn} = useContext(MyContext);
 
   const initialState = {
       userInfo:{
         Username: '',
-        Password: ''
+        Password: '',
       },
+      employee: [],
       errorMsg:'',
       successMsg:'',
   }
 
   const [state,setState] = useState(initialState);
 
-  // On change input value (email & password)
+  //***On change input value (email & password)**//
   const onChangeValue = (e) => {
       setState({
           ...state,
@@ -125,37 +121,39 @@ function Login(){
   }
 
 
-
-  // On Submit Login From
+  //***ON SUBMIT LOGIN FORM**//
   const submitForm = async (e) => {
       e.preventDefault();
       const data = await loginUser(state.userInfo);
       // data.success ?  window.location.href="/profile" : console.log("err");
 console.log(data);
 if ( data == "Successful"){
-  await isLoggedIn();
+//   await isLoggedIn();
   //localStorage.setItem('name', state.userInfo.Username)
-  localStorage.setItem('user', JSON.stringify(state.userInfo))
-  window.location.pathname="/profile";
+  localStorage.setItem('user', JSON.stringify(state.userInfo));
+  
+  //***GET EMPLOYEE DATA***//
+  const username = state.userInfo.Username;  
+  const url = 'http://localhost:3001/employee/' + username;
+//   axios.get(url, {username} ).then(response => { 
+//     console.log(response)
+//     localStorage.setItem('employee', JSON.stringify(response.data)); 
+//     });
+
+    const info = await fetch(url);
+    const response = await info.json();
+    console.log(response)
+    localStorage.setItem('employee', JSON.stringify(response[0])); 
+  
+    window.location.pathname="/profile";
+
+    }
+    else {
+
+        window.location.pathname="/signup";
+    }
 
 }
-
-      // if(data.success && data.token){
-      //     setState({
-      //         ...initialState,
-      //     });
-      //     localStorage.setItem('loginToken', data.token);
-      //     await isLoggedIn();
-      //     window.location.href="/profile";
-      // }
-      // else{
-      //     setState({
-      //         ...state,
-      //         successMsg:'',
-      //         errorMsg:data.message
-      //     });
-      // }
-  }
 
   // Show Message on Error or Success
   let successMsg = '';
@@ -188,9 +186,6 @@ if ( data == "Successful"){
                   <button type="submit">Login</button>
               </div>
           </form>
-           <div className="_navBtn">
-              <button onClick={toggleNav}>Register</button>
-          </div>
       </div>
   
   );

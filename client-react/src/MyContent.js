@@ -4,13 +4,13 @@ export const MyContext = createContext();
 
 // Define the base URL
 const Axios = axios.create({
-    baseURL: 'http://localhost:3001/employee',
+    // baseURL: 'http://localhost:3001/employee',
 });
 
 class MyContextProvider extends Component{
     constructor(){
         super();
-        this.isLoggedIn();
+        // this.isLoggedIn();
     }
 
     // Root State
@@ -31,13 +31,39 @@ class MyContextProvider extends Component{
 
     // On Click the Log out button
     logoutUser = () => {
-       axios.post('logout')
+       axios.post('http://localhost:3001/employee/logout')
+       localStorage.clear();
+       window.location.pathname="/login";
         //localStorage.removeItem('loginToken');
         //this.setState({
            // ...this.state,
            // isAuth:false
         //})
     }
+
+    inventory = () => {
+        // localStorage.clear();
+        window.location.pathname="/inventory";
+     }
+
+     addInventory = async (user) => {
+
+        const add = await Axios.post('http://localhost:3001/inventory/addinventory',{
+            productId: user.ProductID,
+            productName : user.ProductName,
+            productDesc : user.ProductDesc,
+            productQty : user.ProductQty,
+            productPrice : user.ProductPrice   
+        });
+
+        return add.data;
+    }
+
+    listInventory = async () => {
+        const list = await Axios.get('http://localhost:3001/inventory')
+        return list.data
+    }
+
 
     signupUser = async (user) => {
 
@@ -58,7 +84,7 @@ class MyContextProvider extends Component{
     loginUser = async (user) => {
 
         // Sending the user Login request
-        const login = await Axios.post('login',{
+        const login = await Axios.post('http://localhost:3001/employee/login',{
             username: user.Username,
             password: user.Password,
 
@@ -66,39 +92,40 @@ class MyContextProvider extends Component{
          return login.data;
     }
 
-    // Checking user logged in or not
-    isLoggedIn = async () => {
-        const token = localStorage.getItem('jwt');
+    // // Checking user logged in or not
+    // isLoggedIn = async () => {
+    //     const token = localStorage.getItem('token');
 
-        // If inside the local-storage has the JWT token
-        if(token){
+    //     // If inside the local-storage has the JWT token
+    //     if(token){
 
-            //Adding JWT token to axios default header
-            Axios.defaults.headers.common['Authorization'] = 'bearer '+ token;
+    //         //Adding JWT token to axios default header
+    //         Axios.defaults.headers.common['Authorization'] = 'jwt'+ token;
 
-            // Fetching the user information
-            const {data} = await Axios.get('/');
+    //         // Fetching the user information
+    //         const {data} = await Axios.get('/profile');
 
-            // If user information is successfully received
-            if(data.success && data.user){
-                this.setState({
-                    ...this.state,
-                    isAuth:true,
-                    theUser:data.user
-                });
-            }
+    //         // If user information is successfully received
+    //         if(data.success && data.user){
+    //             this.setState({
+    //                 ...this.state,
+    //                 isAuth:true,
+    //                 theUser:data.user
+    //             });
+    //         }
 
-        }
-    }
+    //     }
+    // }
 
     render(){
         const contextValue = {
             rootState:this.state,
             toggleNav:this.toggleNav,
-            isLoggedIn:this.isLoggedIn,
+            // isLoggedIn:this.isLoggedIn,
             signupUser:this.signupUser,
             loginUser:this.loginUser,
-            logoutUser:this.logoutUser
+            logoutUser:this.logoutUser,
+            addInventory:this.addInventory
         }
         return(
             <MyContext.Provider value={contextValue}>

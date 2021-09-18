@@ -53,8 +53,8 @@ router.post('/addinventory', function(req, res, next) {
     })
     .spread(function(result, created) {
       if (created) {
-        //res.send('User successfully created');
-        res.redirect('/inventory/list');
+        res.send('Success');
+        //res.redirect('/inventory/list');
       } else {
         res.send('This product already exists');
       }

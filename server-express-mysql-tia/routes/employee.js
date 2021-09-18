@@ -9,6 +9,19 @@ router.get('/', function(req, res, next) {
   });
 });
 
+//get employee by username
+router.get('/:username', function(req, res, next) {
+  models.employee
+    .findAll({
+      where: {
+      Username: req.params.username
+    }}) 
+    .then(employeeFound => {
+      //res.setHeader('Content-Type', 'application/json');
+      res.json(employeeFound);
+      console.log(employeeFound)
+    })
+});
 
 //Employee and Admin Signup
 router.get('/signup', function(req, res, next) {

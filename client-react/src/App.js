@@ -6,12 +6,12 @@ import MyContextProvider from './MyContent';
 
 
 //import  Task from "./components/Task";
-//import Signup from './components/Signup';
 import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Profile from './components/Profile';
 import Logout from './components/Logout';
+import Inventory from './components/Inventory';
 
 function App () {
   return (
@@ -30,7 +30,9 @@ function App () {
           <li>
             <Link to="/logout">Logout</Link>
           </li>
-          
+          <li>
+            <Link to="/signup">Signup</Link>
+          </li>
         </ul>
       </nav>
 
@@ -42,15 +44,26 @@ function App () {
           <Login />
         </Route>
 
+        <Route path="/signup">
+          <Signup />
+        </Route>
+
         <Route path="/logout">
           <Logout />
         </Route>
+
         <Route path="/profile">
           <Profile />
         </Route>
+
+        <Route path="/inventory">
+          <Inventory />
+        </Route>
+
         <Route path="/">
           <Home />
         </Route>
+
       </Switch>
     </div>
   </Router>

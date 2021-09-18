@@ -3,6 +3,7 @@ import axios from "axios";
 import '../task.min.css'
 import {MyContext} from '../MyContent';
 
+
 /*let url = "http://localhost:3001/employee";
 
 class Signup extends React.Component {
@@ -125,27 +126,8 @@ function Register(){
   }
   const [state,setState] = useState(initialState);
 
-  // On Submit the Registration Form
-  const submitForm = async (event) => {
-      event.preventDefault();
-      const data = await signupUser(state.userInfo);
-      if(data.success){
-          setState({
-              ...initialState,
-              successMsg:data.message,
-          });
-      }
-      else{
-          setState({
-              ...state,
-              successMsg:'',
-              errorMsg:data.message
-          });
-      }
-  }
-
-  // On change the Input Value (name, email, password)
-  const onChangeValue = (e) => {
+    // On change the Input Value (name, email, password)
+    const onChangeValue = (e) => {
       setState({
           ...state,
           userInfo:{
@@ -154,6 +136,28 @@ function Register(){
           }
       });
   }
+
+  // On Submit the Registration Form
+  const submitForm = async (e) => {
+      e.preventDefault();
+      const data = await signupUser(state.userInfo);
+      if(data == 'User successfully created'){
+          setState({
+              ...initialState,
+              // successMsg:data.message,
+          });
+          window.location.pathname="/login";
+      }
+      else{
+          // setState({
+          //     ...state,
+          //     successMsg:'',
+          //     errorMsg:data.message
+          // });
+      }
+  }
+
+
   
   // Show Message on Success or Error
   let successMsg = '';
@@ -194,10 +198,8 @@ function Register(){
               <div className="form-control">
                   <button type="submit">Sign Up</button>
               </div>
+
           </form>
-          <div className="_navBtn">
-              <button  onClick={toggleNav}>Login</button>
-          </div>
       </div>
   );
 }
