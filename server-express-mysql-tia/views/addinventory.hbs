@@ -1,0 +1,36 @@
+
+<form id="addinventory" name="addinventory" method="POST" action="/inventory/addinventory">
+    <div>
+        <label for="name">Product ID: </label>
+        <input type="text" name="productId" required>
+    </div>
+    <div>
+        <label for="name">Product Name: </label>
+        <input type="text" name="productName" required>
+    </div>
+    <div>
+        <label for="name">Product Description: </label>
+        <input type="text" name="productDesc" required>
+    </div>
+    <div>
+        <label for="name">Product Quantity: </label>
+        <input type="text" name="productQty" required>
+    </div>
+    <div>
+        <label for="name">Product Price: </label>
+        <input type="text" name="productPrice" required>
+    </div>
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>
+
+
+<ul>
+{{#each inventories}} 
+<li>
+<h3>{{ProductID}}: {{ProductName}}</h3>
+<h4>{{ProductDesc}}</h4>
+</li>
+{{/each}}
+</ul>
