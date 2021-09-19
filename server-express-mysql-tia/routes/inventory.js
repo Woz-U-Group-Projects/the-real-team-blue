@@ -36,7 +36,13 @@ router.get('/addinventory', function(req, res, next) {
 //Modify an Inventory: Admin Only (Will be on Admin Profile/ No Auth Required Here) (TO BE CHANGED)
 
 //Delete an Inventory: Admin Only (Will be on Admin Profile/ No Auth Required Here) (TO BE CHANGED)
-
+router.delete("/delete", function(req, res, next) {
+  let inventoryId = parseInt(req.params.id);
+  models.inventory.findByPk(inventoryId)
+    .then(inventory => inventory.destroy())
+    .then(() => res.send({ inventoryId }))
+    .catch(err => res.status(400).send(err));
+});
 //Add products to Inventory list
 router.post('/addinventory', function(req, res, next) {
   models.inventory

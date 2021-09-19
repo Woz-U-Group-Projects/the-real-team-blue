@@ -10,17 +10,20 @@ const employee = JSON.parse(localStorage.getItem('employee'));
 
 
 function Profile() {
-const {logoutUser, inventory} = useContext(MyContext);
+const {logoutUser} = useContext(MyContext);
   
-
+const routeChange = () =>{ 
+  window.location.pathname='/inventory';
+}
 return (
-      <div>
+      <div className="_profile">
         <div className="_img"><span role="img" aria-label="User Image">👦</span></div>
         <h1>Hello {employee.FirstName} {employee.LastName}</h1>
-        <h3>Username: {user.Username}</h3>
-        <h3>Email: {user.Email}</h3>
-        <button onClick={logoutUser}>Logout</button>
-        <button onClick={inventory}>Go to Inventory</button>
+        <h3>Username: {employee.Username}</h3>
+        <h3>Employee ID: {employee.EmployeeID}</h3>
+        <h3>Email: {employee.Email}</h3>
+        <div><button onClick={logoutUser}>Logout</button></div>
+        <button onClick={routeChange}>Go to Inventory</button>
       </div>
     );
   

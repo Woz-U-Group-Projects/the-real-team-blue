@@ -41,10 +41,6 @@ class MyContextProvider extends Component{
         //})
     }
 
-    inventory = () => {
-        // localStorage.clear();
-        window.location.pathname="/inventory";
-     }
 
      addInventory = async (user) => {
 
@@ -57,11 +53,6 @@ class MyContextProvider extends Component{
         });
 
         return add.data;
-    }
-
-    listInventory = async () => {
-        const list = await Axios.get('http://localhost:3001/inventory')
-        return list.data
     }
 
 

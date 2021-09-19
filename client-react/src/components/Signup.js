@@ -175,27 +175,28 @@ function Register(){
           <form onSubmit={submitForm} noValidate>
               <div className="form-control">
                   <label>First Name</label>
-                  <input name="FirstName" required type="text" value={state.userInfo.FirstName} onChange={onChangeValue} />
+                  <input name="FirstName" required type="text" value={state.userInfo.FirstName} onChange={onChangeValue} required/>
               </div>
               <div className="form-control">
                   <label>Last Name</label>
-                  <input name="LastName" required type="text" value={state.userInfo.LastName} onChange={onChangeValue} />
+                  <input name="LastName" required type="text" value={state.userInfo.LastName} onChange={onChangeValue} required/>
               </div>
               <div className="form-control">
                   <label>Username</label>
-                  <input name="Username" required type="text" value={state.userInfo.Username} onChange={onChangeValue} />
+                  <input name="Username" required type="text" value={state.userInfo.Username} onChange={onChangeValue} required/>
               </div>
               <div className="form-control">
                   <label>Email</label>
-                  <input name="Email" required type="email" value={state.userInfo.Email} onChange={onChangeValue} />
+                  <input name="Email" required type="email" value={state.userInfo.Email} onChange={onChangeValue} required/>
               </div>
               <div className="form-control">
                   <label>Password</label>
-                  <input name="Password" required type="password" value={state.userInfo.Password} onChange={onChangeValue} />
+                  <input name="Password" required type="password" value={state.userInfo.Password} onChange={onChangeValue} required/>
               </div>
               {errorMsg}
               {successMsg}
-              <div className="form-control">
+              <div>By signing up you agree to the ridiculously long terms that you didn't bother to read</div>
+              <div>
                   <button type="submit">Sign Up</button>
               </div>
 

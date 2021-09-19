@@ -126,7 +126,7 @@ function Login(){
       e.preventDefault();
       const data = await loginUser(state.userInfo);
       // data.success ?  window.location.href="/profile" : console.log("err");
-console.log(data);
+    console.log(data);
 if ( data == "Successful"){
 //   await isLoggedIn();
   //localStorage.setItem('name', state.userInfo.Username)
@@ -168,24 +168,25 @@ if ( data == "Successful"){
 
 
   return(
-  
+  <div>
       <div className="_loginRegister">
           <h1>Login</h1>
           <form  onSubmit={submitForm} noValidate>
               <div className="form-control">
                   <label>Username</label>
-                  <input name="Username" type="text" value={state.userInfo.Username} onChange={onChangeValue} />
+                  <input name="Username" type="text" value={state.userInfo.Username} onChange={onChangeValue} required/>
               </div>
               <div className="form-control">
-                  <label>PassWord</label>
-                  <input name="Password" type="password" value={state.userInfo.Password} onChange={onChangeValue} />
+                  <label>Password</label>
+                  <input name="Password" type="password" value={state.userInfo.Password} onChange={onChangeValue} required/>
               </div>
               {errorMsg}
               {successMsg}
-              <div className="form-control">
+              <div>
                   <button type="submit">Login</button>
               </div>
           </form>
+      </div>
       </div>
   
   );

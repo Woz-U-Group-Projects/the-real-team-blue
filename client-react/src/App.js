@@ -5,35 +5,27 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import MyContextProvider from './MyContent';
 
 
+
 //import  Task from "./components/Task";
 import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Profile from './components/Profile';
-import Logout from './components/Logout';
 import Inventory from './components/Inventory';
+import About from './components/About';
 
 function App () {
   return (
     <MyContextProvider>
     <Router>
     <div>
-      <nav>
-        <ul>
-          <li>
+      <nav className="navMenu">
             <Link to="/">Home</Link>
-          </li>
-
-          <li>
+            <Link to="/about">About</Link>
             <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/logout">Logout</Link>
-          </li>
-          <li>
             <Link to="/signup">Signup</Link>
-          </li>
-        </ul>
+            
+        <div className="dot"></div>
       </nav>
 
       {/* A <Switch> looks through its children <Route>s and
@@ -48,12 +40,12 @@ function App () {
           <Signup />
         </Route>
 
-        <Route path="/logout">
-          <Logout />
-        </Route>
-
         <Route path="/profile">
           <Profile />
+        </Route>
+
+        <Route path="/about">
+          <About />
         </Route>
 
         <Route path="/inventory">
