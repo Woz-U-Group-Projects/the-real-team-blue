@@ -73,7 +73,7 @@ function Inventory () {
       <div className="_inventory">
           <button onClick={routeChange}>Go to Back to Profile</button>
           <h1>Inventory</h1>
-          <form onSubmit={submitForm} noValidate>
+          <form className="input"  onSubmit={submitForm} noValidate>
               <div>
                   <label>Product ID:</label>
                   <input name="ProductID" required type="text" value={state.itemInfo.ProductID} onChange={onChangeValue} />

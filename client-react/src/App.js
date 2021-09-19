@@ -13,6 +13,7 @@ import Signup from './components/Signup';
 import Profile from './components/Profile';
 import Inventory from './components/Inventory';
 import About from './components/About';
+import Products from './components/Products';
 
 function App () {
   return (
@@ -23,7 +24,8 @@ function App () {
             <Link to="/">Home</Link>
             <Link to="/about">About</Link>
             <Link to="/login">Login</Link>
-            <Link to="/signup">Signup</Link>
+            <Link to="/products">Products</Link>
+            
             
         <div className="dot"></div>
       </nav>
@@ -50,6 +52,10 @@ function App () {
 
         <Route path="/inventory">
           <Inventory />
+        </Route>
+
+        <Route path="/products">
+          <Products />
         </Route>
 
         <Route path="/">

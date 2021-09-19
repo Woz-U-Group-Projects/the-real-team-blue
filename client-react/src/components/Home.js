@@ -16,6 +16,10 @@ class Home extends React.Component {
   routeAbout = () =>{ 
     window.location.pathname='/about';
   }
+
+  routeProd = () =>{ 
+    window.location.pathname='/products';
+  }
     render() {
       return (
         <div className="_home">
@@ -31,6 +35,7 @@ class Home extends React.Component {
             <div><button onClick={this.routeAbout}>About</button></div>
             <div><button onClick={this.routeLogin}>Login</button></div>
             <div><button onClick={this.routeSignup}>Signup</button></div>
+            <div><button onClick={this.routeProd}>Products</button></div>
             
             </div>
         </div>

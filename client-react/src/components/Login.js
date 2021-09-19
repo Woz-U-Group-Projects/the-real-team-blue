@@ -165,7 +165,9 @@ if ( data == "Successful"){
       successMsg = <div className="success-msg">{state.successMsg}</div>;
   }
 
-
+  const routeChange = () =>{ 
+    window.location.pathname='/signup';
+  }
 
   return(
   <div>
@@ -186,6 +188,7 @@ if ( data == "Successful"){
                   <button type="submit">Login</button>
               </div>
           </form>
+          <button onClick={routeChange}>Sign Up</button>
       </div>
       </div>
   
