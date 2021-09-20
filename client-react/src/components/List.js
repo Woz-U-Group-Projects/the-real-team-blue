@@ -2,10 +2,13 @@ import React from "react";
 import axios from "axios";
 import '../task.min.css'
 
+//**Product List Accessible to Employees Only**//
+
 class List extends React.Component {
   constructor(props) {
     super(props);
     this.state = { inventory: [] };
+    this.productId = React.createRef;
   }
 
   componentDidMount() {
@@ -15,24 +18,27 @@ class List extends React.Component {
    componentDidUpdate(){
    console.log(this.state);
  }
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value,
-      //redirectToReferrer: true
-    })
-  }
+  // handleChange = e => {
+  //   this.setState({
+  //     [e.target.name]: e.target.value,
+  //     //redirectToReferrer: true
+  //   })
+  // }
 
   getData = () => {
     let url = "http://localhost:3001/inventory";
     axios.get(url).then(response => this.setState({ inventory: response.data }));
   };
 
-  // deleteData = (e) => {
-  //   fetch
-  //   this.setState({inventory: this.state.inventory.filter(function(product) { 
-  //     return product !== e.target.value 
-  // })});
-  // }
+//   deleteData = () => {
+//   let url = "http://localhost:3001/inventory/" + this.state.inventory.ProductID ;
+//   axios.delete(url, { productID: this.productId.current.value }).then(response => {
+//     // refresh the data
+//     this.getData();
+  
+//   });
+// };
+
 
   render() {
     return (
@@ -46,7 +52,7 @@ class List extends React.Component {
              <div>Product Price: { p.ProductPrice } </div>
              <div>Created On: { p.createdAt } </div>
              <div>Updated On: { p.updatedAt} </div> 
-             <button onClick={this.deleteData} type="button" className="btn btn-danger">Delete</button>
+             <button onClick={this.deleteData} type="button" className="btn btn-danger">Delete</button> 
             </li>
           ))}
           

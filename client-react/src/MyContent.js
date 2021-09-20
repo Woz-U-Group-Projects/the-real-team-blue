@@ -20,7 +20,7 @@ class MyContextProvider extends Component{
         theUser:null,
     }
     
-    // Toggle between Login & Signup page
+    // Toggle between Login & Signup page, DOES NOT WORK
     toggleNav = () => {
         const showLogin = !this.state.showLogin;
         this.setState({
@@ -41,7 +41,7 @@ class MyContextProvider extends Component{
         //})
     }
 
-
+    // Add Inventory Button
      addInventory = async (user) => {
 
         const add = await Axios.post('http://localhost:3001/inventory/addinventory',{
@@ -59,7 +59,7 @@ class MyContextProvider extends Component{
     signupUser = async (user) => {
 
         // Sending the user registration request
-        const signup = await Axios.post('signup',{
+        const signup = await Axios.post('http://localhost:3001/employee/signup',{
             username: user.Username,
             firstName: user.FirstName,
             lastName: user.LastName,

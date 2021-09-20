@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 import '../task.min.css'
+  
+//**Product List Accessible to Everyone**//
 
 class List2 extends React.Component {
   constructor(props) {

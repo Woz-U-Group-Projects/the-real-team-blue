@@ -1,14 +1,14 @@
-import React, {useContext, useEffect, useState} from "react";
-import axios from "axios";
+import React from "react";
+// import axios from "axios";
 import '../task.min.css'
 import List2 from './List2';
 
 function Products () {
 
 
-  const routeChange = () =>{ 
-    window.location.pathname='/profile';
-  }
+//   const routeChange = () =>{ 
+//     window.location.pathname='/profile';
+//   }
 
   return(
       <div className="_inventory">

@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
   });
 });
 
-//get employee by username
+//Get employee by username
 router.get('/:username', function(req, res, next) {
   models.employee
     .findAll({

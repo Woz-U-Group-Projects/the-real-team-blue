@@ -1,5 +1,5 @@
-import React, {useContext, useEffect, useState} from "react";
-import axios from "axios";
+import React, {useContext, useState} from "react";
+// import axios from "axios";
 import '../task.min.css'
 import {MyContext} from '../MyContent';
 import List from './List';
@@ -36,9 +36,9 @@ function Inventory () {
 
   // On Submit the Registration Form
   const submitForm = async (e) => {
-      e.preventDefault();
+    //   e.preventDefault();
       const data = await addInventory(state.itemInfo);
-      if(data == 'Success'){
+      if(data === 'Success'){
           setState({
               ...initialState,
               // successMsg:data.message,

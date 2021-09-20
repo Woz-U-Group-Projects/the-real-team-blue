@@ -68,26 +68,6 @@ function App () {
   </MyContextProvider>
   )
 };
-//<li>
-//<Link to="/signup">Sign Up</Link>
-//</li>
-
-//        <Route path="/signup">
-//<Signup />
-//</Route>
 
 export default App;
 
-/*<div className="navbar">
-      <div className="links"> 
-        <a href="/Home">Main Page</a>
-        <a href="/Signup">Sign Up</a>
-        <a href="/Login">Login</a>
-      </div>
-      <div><Home /></div>
-      <div><Signup /></div>
-      <div><Login /></div>
-      <div><Profile FirstName={this.state.employee.FirstName}/></div>
-      
-      
-    </div>*/

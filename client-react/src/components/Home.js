@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+// import axios from "axios";
 import '../task.min.css'
 
 
@@ -23,15 +23,15 @@ class Home extends React.Component {
     render() {
       return (
         <div className="_home">
-           <div class="card">
-            <div class="firstBx">
+           <div className="card">
+            <div className="firstBx">
             <h1>
               <div>A</div> 
               <div>B</div> 
               <div>COMPUTERS</div>
               </h1>
             </div>
-            <div class="details">
+            <div className="details">
             <div><button onClick={this.routeAbout}>About</button></div>
             <div><button onClick={this.routeLogin}>Login</button></div>
             <div><button onClick={this.routeSignup}>Signup</button></div>
